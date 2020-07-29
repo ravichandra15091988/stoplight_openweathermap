@@ -19,7 +19,6 @@ paths:
       summary: Weather
       tags:
         - “Weather endpoints”
-      responses: {}
       operationId: get-weather
       description: 'Access current weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations.'
       parameters:
@@ -38,8 +37,95 @@ paths:
           in: query
           name: units
           description: '**Units**. *Example: imperial*. Possible values: `standard`, `metric`, and `imperial`. When you do not use the `units` parameter, the format is `standard` by default.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: |
+                  sdvds
+                allOf:
+                  - properties:
+                      'type ':
+                        type: number
+                        description: Internal parameter
+                        example: 1
+                      id:
+                        type: number
+                        description: ' Internal parameter'
+                        example: 1
+                      country:
+                        type: string
+                        description: ' Internal parameter'
+                        example: '8166'
+                      sunrise:
+                        type: number
+                        description: ' ‘Sunrise time, unix, UTC’'
+                        example: AU
+                      sunset:
+                        type: number
+                        description: '‘Sunset time, unix, UTC’'
+                        example: 1435650870
+                type: object
+              examples:
+                Coord: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+            text/html:
+              schema:
+                type: object
+                properties: {}
+            text/plain:
+              schema:
+                type: object
+                properties: {}
+            application/postscript:
+              schema:
+                type: object
+                properties: {}
+          headers: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized_response'
+    post:
+      summary: ''
+      operationId: post-weather
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
 components:
-  schemas: {}
+  schemas:
+    unauthorized_response:
+      title: unauthorized_response
+      type: object
+      description: ''
+      x-tags:
+        - “Weather endpoints”
+      properties:
+        cod:
+          type: number
+        message:
+          type: string
+      required:
+        - cod
+        - message
   securitySchemes: {}
 tags:
   - name: “Weather endpoints”
